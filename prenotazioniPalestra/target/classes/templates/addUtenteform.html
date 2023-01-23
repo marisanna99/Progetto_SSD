@@ -1,0 +1,41 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<title>Aggiungi Utente</title>
+		
+		<link rel="stylesheet" 
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+			integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" 
+			crossorigin="anonymous" />
+	</head>
+	<body>
+		
+		<div class="container">
+		
+			<h3>Aggiungi nuovo utente</h3>
+			<hr/>
+			
+			<form th:action="@{/app/utente/saveUtente}" th:object="${utente}" method="POST">
+				
+				<input type="text" th:field="*{nome}" class="form-control col-4 mb-4" placeholder="Inserisci nome" />
+
+                <input type="text" th:field="*{cognome}" class="form-control col-4 mb-4" placeholder="Inserisci cognome" />
+				
+				<input type="text" th:field="*{email}" class="form-control col-4 mb-4" placeholder="Inserisci email" />
+				
+				<input type="text" th:field="*{certificato}" class="form-control col-4 mb-4" placeholder="0: no certificato, 1: con certificato" />
+				
+                <input type="text" th:field="*{tipo}" class="form-control col-4 mb-4" placeholder="1: trainer, 2: atleta" />
+
+
+
+				<button type="submit" class="btn btn-primary col-2">Salva</button>
+				<input type="hidden" th:field="*{idUtente}" />
+				
+			</form>
+			<hr/>
+			<a th:href="@{/app/utente/all}">Torna alla lista utenti</a>
+		</div>
+		
+	</body>
+</html>

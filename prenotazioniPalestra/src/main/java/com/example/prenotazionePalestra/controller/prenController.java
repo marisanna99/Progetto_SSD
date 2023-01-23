@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller	
@@ -19,6 +20,24 @@ public class prenController {
 	
 	@Autowired
 	private PrenRepository prenRepository;
+
+	
+	@GetMapping("/addPrenotazioneForm")
+	public ModelAndView addPrenotazioneForm() {
+		ModelAndView mav = new ModelAndView("addPrenform");
+		Prenotazione newPren = new Prenotazione();
+		mav.addObject("prenotazione", newPren);
+		return mav;
+	}
+
+	@PostMapping("/savePrenotazione")
+	public String savePrenotazione(@ModelAttribute Prenotazione p) {
+		prenRepository.save(p);
+		return "redirect:/app/prenotazioni/addPrenotazioneForm";
+	}
+
+
+
 
 	@GetMapping(path="/all")
 	public ModelAndView getAllPrenotazioni() {

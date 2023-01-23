@@ -1,0 +1,40 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<title>Aggiungi Prenotazione</title>
+		
+		<link rel="stylesheet" 
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+			integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" 
+			crossorigin="anonymous" />
+	</head>
+	<body>
+		
+		<div class="container">
+		
+			<h3>Aggiungi nuova Prenotazione</h3>
+			<hr/>
+			
+			<form th:action="@{/app/prenotazioni/savePrenotazione}" th:object="${prenotazione}" method="POST">
+				
+                <input type="text" th:field="*{idUtente}" class="form-control col-4 mb-4" placeholder="Inserisci matricola" />
+
+				<input type="text" th:field="*{sala}" class="form-control col-4 mb-4" placeholder="Inserisci sala" />
+
+                <input type="text" th:field="*{oraArrivo}" class="form-control col-4 mb-4" placeholder="Inserisci ora di arrivo" />
+				
+				<input type="text" th:field="*{minArrivo}" class="form-control col-4 mb-4" placeholder="Inserisci minuti di arrivo" />
+				
+
+
+
+				<button type="submit" class="btn btn-primary col-2">Salva</button>
+				<input type="hidden" th:field="*{idPren}" />
+				
+			</form>
+            <hr/>
+			<a th:href="@{/app/prenotazioni/addPrenotazioneForm}">Effettua un'altra prenotazione</a>
+		</div>
+		
+	</body>
+</html>

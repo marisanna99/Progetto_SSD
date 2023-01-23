@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller	
 @RequestMapping(path="/app/prenotazioni") 
@@ -19,12 +20,23 @@ public class prenController {
 	@Autowired
 	private PrenRepository prenRepository;
 
+	@GetMapping(path="/all")
+	public ModelAndView getAllPrenotazioni() {
+		ModelAndView mav = new ModelAndView("listaPrenotazioni");
+		mav.addObject("prenotazioni", prenRepository.findAll());
+		return mav;
+	}
 
+
+
+
+
+
+	//---------------------------------------------------------------
+	/*
 	@PostMapping(path="/add/{idU}") // Map ONLY POST Requests
 	public @ResponseBody String addNewPren (@PathVariable("idU")  Integer idU, @RequestParam String sala
 				, @RequestParam Integer ora, @RequestParam Integer min) {
-		// @ResponseBody means the returned String is the response, not a view name
-		// @RequestParam means it is a parameter from the GET or POST request
 
 		Prenotazione p = new Prenotazione();
 		p.setIdUtente(idU);
@@ -40,4 +52,6 @@ public class prenController {
 		// This returns a JSON or XML with the users
 		return prenRepository.findAll();
 	}
+*/
+	
 }

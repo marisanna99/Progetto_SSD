@@ -33,11 +33,15 @@ public class prenController {
 	@PostMapping("/savePrenotazione")
 	public String savePrenotazione(@ModelAttribute Prenotazione p) {
 		prenRepository.save(p);
-		return "redirect:/app/prenotazioni/addPrenotazioneForm";
+		return "redirect:/app/prenotazioni/prenOK";
 	}
 
 
-
+	@GetMapping(path="/prenOK")
+	public ModelAndView mostraMsgOK() {
+		ModelAndView mav = new ModelAndView("prenOK");
+		return mav;	
+	}
 
 	@GetMapping(path="/all")
 	public ModelAndView getAllPrenotazioni() {

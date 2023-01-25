@@ -25,6 +25,7 @@
 			
 				<thead>
 					<tr>
+						<th>Matricola</th>
 						<th>Nome</th>
 						<th>Cognome</th>
 						<th>Email</th>
@@ -34,6 +35,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="u: ${utenti}">
+						<td th:text="${u.idUtente}" />
 						<td th:text="${u.nome}" />
 						<td th:text="${u.cognome}" />
 						<td th:text="${u.email}" />

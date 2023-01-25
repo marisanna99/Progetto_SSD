@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
+import java.time.LocalDate;
 
 @Controller	
 @RequestMapping(path="/app/prenotazioni") 
@@ -20,6 +23,9 @@ public class prenController {
 	
 	@Autowired
 	private PrenRepository prenRepository;
+
+	@Autowired
+	private UtenteRepository uRepo;
 
 	
 	@GetMapping("/addPrenotazioneForm")
@@ -32,14 +38,35 @@ public class prenController {
 
 	@PostMapping("/savePrenotazione")
 	public String savePrenotazione(@ModelAttribute Prenotazione p) {
-		prenRepository.save(p);
-		return "redirect:/app/prenotazioni/prenOK";
+		Integer idU = p.getIdUtente();
+		Optional<Utente> u = uRepo.findById(idU);
+		if (u.isEmpty()){
+			return "redirect:/app/prenotazioni/prenNOTOK";
+		}else{
+			try {
+				LocalDate todaysDate = LocalDate.now();
+				p.setData(todaysDate);
+				prenRepository.save(p);
+				return "redirect:/app/prenotazioni/prenOK";
+			} catch (Exception e) {
+				// TODO: handle exception
+				return "redirect:/app/prenotazioni/prenNOTOK";
+			}
+		}
+		
+		
 	}
 
 
 	@GetMapping(path="/prenOK")
 	public ModelAndView mostraMsgOK() {
 		ModelAndView mav = new ModelAndView("prenOK");
+		return mav;	
+	}
+
+	@GetMapping(path="/prenNOTOK")
+	public ModelAndView mostraMsgNOTOK() {
+		ModelAndView mav = new ModelAndView("prenNOTOK");
 		return mav;	
 	}
 

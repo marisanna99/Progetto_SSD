@@ -37,8 +37,19 @@ public class utenteController {
 
 	@PostMapping("/saveUtente")
 	public String saveUtente(@ModelAttribute Utente u) {
-		utenteRepository.save(u);
-		return "redirect:/app/utente/all";
+		try {
+			utenteRepository.save(u);
+			return "redirect:/app/utente/all";
+		} catch (Exception e) {
+			return "redirect:/app/utente/newUtenteNOTOK";
+		}
+		
+	}
+
+	@GetMapping(path="/newUtenteNOTOK")
+	public ModelAndView userNOTOK() {
+		ModelAndView mav = new ModelAndView("newUtenteNOTOK");
+		return mav;	
 	}
 
 	//----------------------------------INDIA

@@ -27,6 +27,7 @@ public class Utente{
 
     @NotNull
     @Pattern(regexp = "[a-zA-Z0-9]+")
+    @NotEmpty(message = "Il campo va compilato")
     private String nome;
     private String cognome;
 

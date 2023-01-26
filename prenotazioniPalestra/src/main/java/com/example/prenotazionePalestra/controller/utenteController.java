@@ -4,6 +4,8 @@ import com.example.prenotazionePalestra.entity.*;
 import com.example.prenotazionePalestra.repository.*;
 
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,9 +14,12 @@ import java.util.Random;
 import java.lang.Math;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,18 +27,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
+import org.apache.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.keycloak.KeycloakSecurityContext;
+import org.keycloak.adapters.spi.KeycloakAccount;
+import org.keycloak.representations.AccessTokenResponse;
+import com.example.prenotazionePalestra.http.LoginRequest;
+//import org.keycloak.admin.client.Keycloak;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.ServletException;
+//import javax.ws.rs.BadRequestException;
 
 @Controller	
-@RequestMapping(path="/app/utente") 
+@RequestMapping(path="/app") 
 public class utenteController {
+
 	@Autowired 
 	private UtenteRepository utenteRepository;
 
 
 	@RolesAllowed("admin_role")
-	@GetMapping("/addUtenteForm")
+	@GetMapping("/utente/addUtenteForm")
 	public ModelAndView addUtenteForm() {
 		ModelAndView mav = new ModelAndView("addUtenteform");
 		Utente newUtente = new Utente();
@@ -41,7 +56,7 @@ public class utenteController {
 		return mav;
 	}
 
-	@PostMapping("/saveUtente")
+	@PostMapping("/utente/saveUtente")
 	public String saveUtente(@ModelAttribute Utente u) {
 		try {
 			Random rd = new Random();
@@ -63,21 +78,99 @@ public class utenteController {
 		
 	}
 
-	@GetMapping(path="/newUtenteNOTOK")
+	@GetMapping(path="/utente/newUtenteNOTOK")
 	public ModelAndView userNOTOK() {
 		ModelAndView mav = new ModelAndView("newUtenteNOTOK");
 		return mav;	
 	}
 
+	@GetMapping("/Dashboard")
+    public ModelAndView Dashboard() {
+        //logging(request);
+
+		ModelAndView mav = new ModelAndView("dashboard");
+        int r = 0;
+        /*String role = authentication.getAuthorities().stream().findFirst().get().toString();
+        if (role.equals("ROLE_admin_role")) {
+            r = 0;
+        } else if (role.equals("ROLE_trainer_role")) {
+            r = 1;
+        } else if (role.equals("ROLE_atleta_role")){
+			r = 2;
+		}*/
+        mav.addObject("r", r);
+        return mav;
+
+    }
+
+/* 
+	@GetMapping(path = "/all")
+	public String getAllUtenti(Model model) {
+		configCommonAttributes(model);
+		model.addAttribute("utenti", utenteRepository.findAll());
+		return "listaUtenti";
+	}
+
+	private void configCommonAttributes(Model model) {
+		model.addAttribute("name", getKeycloakSecurityContext().getIdToken().getGivenName());
+	}
+
+	private KeycloakSecurityContext getKeycloakSecurityContext() {
+		return (KeycloakSecurityContext) request.getAttribute(KeycloakSecurityContext.class.getName());
+	}
+*/
 	//----------------------------------INDIA
 	
-	@GetMapping(path="/all")
+	@GetMapping(path="/utente/all")
 	public ModelAndView getAllUtenti() {
 		ModelAndView mav = new ModelAndView("listaUtenti");
 		mav.addObject("utenti", utenteRepository.findAll());
 		return mav;
 	}
-	
+/* 
+	@GetMapping("/Dashboard")
+    public String Dashboard(HttpServletRequest request, Authentication authentication, Model model) {
+        //logging(request);
+        int r = 0;
+        String role = authentication.getAuthorities().stream().findFirst().get().toString();
+        if (role.equals("ROLE_admin_role")) {
+            r = 0;
+        } else if (role.equals("ROLE_trainer_role")) {
+            r = 1;
+        } else if (role.equals("ROLE_atleta_role")){
+			r = 2;
+		}
+        model.addAttribute("r", r);
+        return "dashboard";
+
+    }
+*/
+	@GetMapping("/logout")
+    public String logout(@RequestHeader("Authorization") String token, HttpServletRequest request) throws ServletException {
+        //logging(request);
+        request.logout();
+        return "logout";
+    }
+
+
+
+
+	/* 
+	@PostMapping("/login")
+    public ResponseEntity<AccessTokenResponse> login(@NotNull @RequestBody LoginRequest loginRequest) {
+        Keycloak keycloak = kcProvider.newKeycloakBuilderWithPasswordCredentials(loginRequest.getUsername(), loginRequest.getPassword()).build();
+
+        AccessTokenResponse accessTokenResponse = null;
+        try {
+            accessTokenResponse = keycloak.tokenManager().getAccessToken();
+            return ResponseEntity.status(HttpStatus.OK).body(accessTokenResponse);
+        } catch (BadRequestException ex) {
+            LOG.warn("invalid account. User probably hasn't verified email.", ex);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(accessTokenResponse);
+        }
+
+    }
+*/
 
 
 

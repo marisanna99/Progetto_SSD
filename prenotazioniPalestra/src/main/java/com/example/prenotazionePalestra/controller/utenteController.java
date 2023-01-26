@@ -3,6 +3,8 @@ package com.example.prenotazionePalestra.controller;
 import com.example.prenotazionePalestra.entity.*;
 import com.example.prenotazionePalestra.repository.*;
 
+import jakarta.annotation.security.RolesAllowed;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ public class utenteController {
 	private UtenteRepository utenteRepository;
 
 
-	
+	@RolesAllowed("admin_role")
 	@GetMapping("/addUtenteForm")
 	public ModelAndView addUtenteForm() {
 		ModelAndView mav = new ModelAndView("addUtenteform");

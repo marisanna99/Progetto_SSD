@@ -3,6 +3,8 @@ package com.example.prenotazionePalestra.controller;
 import com.example.prenotazionePalestra.entity.*;
 import com.example.prenotazionePalestra.repository.*;
 
+import jakarta.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +29,7 @@ public class prenController {
 	@Autowired
 	private UtenteRepository uRepo;
 
-	
+	@RolesAllowed("atleta_role")
 	@GetMapping("/addPrenotazioneForm")
 	public ModelAndView addPrenotazioneForm() {
 		ModelAndView mav = new ModelAndView("addPrenform");
@@ -70,6 +72,7 @@ public class prenController {
 		return mav;	
 	}
 
+	@RolesAllowed("trainer_role")
 	@GetMapping(path="/all")
 	public ModelAndView getAllPrenotazioni() {
 		ModelAndView mav = new ModelAndView("listaPrenotazioni");

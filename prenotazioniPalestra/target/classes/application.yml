@@ -1,0 +1,10 @@
+server:
+    port: 8080
+
+keycloak:
+    realm: prenRealm
+    auth-server-url: http://localhost:9000/auth
+    ssl-required: external
+    resource: prenPalestra
+    credentials.secret: b87d573f-fdf5-41a3-9525-94cb01baff09
+    use-resource-role-mappings: true

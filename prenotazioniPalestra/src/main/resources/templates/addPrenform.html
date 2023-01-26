@@ -17,7 +17,7 @@
 			
 			<form th:action="@{/app/prenotazioni/savePrenotazione}" th:object="${prenotazione}" method="POST">
 				
-                <input type="text" th:field="*{idUtente}" class="form-control col-4 mb-4" placeholder="Inserisci matricola" />
+                <input type="text" th:field="*{matricola}" class="form-control col-4 mb-4" placeholder="Inserisci matricola" />
 
 				<input type="text" th:field="*{sala}" class="form-control col-4 mb-4" placeholder="Inserisci sala" />
 

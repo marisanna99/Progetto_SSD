@@ -30,7 +30,10 @@ public class Prenotazione{
     @Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer idPren;
-	private Integer idUtente;
+	//private Integer idUtente;
+
+	@NotNull
+	private Integer matricola;
 
     @NotNull
 	@Pattern(regexp = "[a-zA-Z]+")

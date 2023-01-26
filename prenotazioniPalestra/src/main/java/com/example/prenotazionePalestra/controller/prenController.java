@@ -40,8 +40,8 @@ public class prenController {
 
 	@PostMapping("/savePrenotazione")
 	public String savePrenotazione(@ModelAttribute Prenotazione p) {
-		Integer idU = p.getIdUtente();
-		Optional<Utente> u = uRepo.findById(idU);
+		Integer matricola = p.getMatricola();
+		Optional<Utente> u = uRepo.findById(matricola);
 		if (u.isEmpty()){
 			return "redirect:/app/prenotazioni/prenNOTOK";
 		}else{

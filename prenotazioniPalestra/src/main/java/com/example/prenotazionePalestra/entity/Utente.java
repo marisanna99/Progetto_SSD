@@ -22,9 +22,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Utente{
-    @Id
+    /*@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer idUtente;
+    */
 
     @NotNull
     @Pattern(regexp = "[a-zA-Z0-9]+")
@@ -32,6 +33,9 @@ public class Utente{
     private String nome;
     private String cognome;
     private String username;
+
+    @Id
+    private Integer matricola;
 
     @NotNull
     @NotEmpty(message = "Il campo va compilato")

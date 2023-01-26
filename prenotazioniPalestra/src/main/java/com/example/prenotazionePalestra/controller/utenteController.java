@@ -5,7 +5,11 @@ import com.example.prenotazionePalestra.repository.*;
 
 import jakarta.annotation.security.RolesAllowed;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
+import java.lang.Math;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +44,17 @@ public class utenteController {
 	@PostMapping("/saveUtente")
 	public String saveUtente(@ModelAttribute Utente u) {
 		try {
+			Random rd = new Random();
+			LocalDateTime todaysDate = LocalDateTime.now();
+			int sec = todaysDate.getSecond();
+			int min = todaysDate.getMinute();
+			int hour = todaysDate.getHour();
+			int day = todaysDate.getDayOfMonth();
+			int month = todaysDate.getMonthValue();
+			int year = todaysDate.getYear();
+			int unique= (sec+min+day+month+year)*hour;
+			int x = (rd.nextInt(900) + 100) * unique; //creo matricola random da 100 a 999
+			u.setMatricola(x);
 			utenteRepository.save(u);
 			return "redirect:/app/utente/all";
 		} catch (Exception e) {

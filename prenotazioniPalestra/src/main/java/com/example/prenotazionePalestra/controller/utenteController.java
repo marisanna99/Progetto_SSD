@@ -35,7 +35,6 @@ import org.springframework.security.core.Authentication;
 import org.keycloak.KeycloakSecurityContext;
 import org.keycloak.adapters.spi.KeycloakAccount;
 import org.keycloak.representations.AccessTokenResponse;
-import com.example.prenotazionePalestra.http.LoginRequest;
 //import org.keycloak.admin.client.Keycloak;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,8 +58,9 @@ public class utenteController {
 		return mav;
 	}
 
+	@RolesAllowed("admin_role")
 	@PostMapping("/utente/saveUtente")
-	public String saveUtente(@ModelAttribute Utente u) {
+	public ModelAndView saveUtente(@ModelAttribute Utente u) {
 		try {
 			Random rd = new Random();
 			LocalDateTime todaysDate = LocalDateTime.now();
@@ -74,18 +74,25 @@ public class utenteController {
 			int x = (rd.nextInt(900) + 100) * unique; //creo matricola random da 100 a 999
 			u.setMatricola(x);
 			utenteRepository.save(u);
-			return "redirect:/app/utente/all";
+			//return "redirect:/app/utente/all";
+			ModelAndView mav = new ModelAndView("listaUtenti");
+			mav.addObject("utenti", utenteRepository.findAll());
+			return mav;
 		} catch (Exception e) {
-			return "redirect:/app/utente/newUtenteNOTOK";
+			//return "redirect:/app/utente/newUtenteNOTOK";
+			ModelAndView mav = new ModelAndView("newUtenteNOTOK");
+			return mav;	
 		}
 		
 	}
 
+	/*
 	@GetMapping(path="/utente/newUtenteNOTOK")
 	public ModelAndView userNOTOK() {
 		ModelAndView mav = new ModelAndView("newUtenteNOTOK");
 		return mav;	
 	}
+	*/
 
 	@GetMapping("/Dashboard")
     public ModelAndView Dashboard() {
@@ -106,6 +113,19 @@ public class utenteController {
 
     }
 
+	//----------------------------------INDIA
+	/* 
+	@RolesAllowed("admin_role")
+	@GetMapping(path="/utente/all")
+	public ModelAndView getAllUtenti() {
+		ModelAndView mav = new ModelAndView("listaUtenti");
+		mav.addObject("utenti", utenteRepository.findAll());
+		return mav;
+	}
+	*/
+
+
+
 /* 
 	@GetMapping(path = "/all")
 	public String getAllUtenti(Model model) {
@@ -122,14 +142,7 @@ public class utenteController {
 		return (KeycloakSecurityContext) request.getAttribute(KeycloakSecurityContext.class.getName());
 	}
 */
-	//----------------------------------INDIA
 	
-	@GetMapping(path="/utente/all")
-	public ModelAndView getAllUtenti() {
-		ModelAndView mav = new ModelAndView("listaUtenti");
-		mav.addObject("utenti", utenteRepository.findAll());
-		return mav;
-	}
 /* 
 	@GetMapping("/Dashboard")
     public String Dashboard(HttpServletRequest request, Authentication authentication, Model model) {

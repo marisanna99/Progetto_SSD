@@ -41,12 +41,14 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider);
     }
 
-//Aggiunto 
+    /*
+        //Aggiunto 
 
-    @Bean
-    public KeycloakConfigResolver keycloakConfigResolver() {
-    return new KeycloakSpringBootConfigResolver();
-}
+            @Bean
+            public KeycloakConfigResolver keycloakConfigResolver() {
+            return new KeycloakSpringBootConfigResolver();
+        }
+*/
     
     
     /**
@@ -63,10 +65,7 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         super.configure(http);
         http
                 .authorizeRequests()
-                .antMatchers("app/utente/*").hasAnyRole("admin_role")
-                .anyRequest().permitAll();
-
-                
+                .anyRequest().permitAll();  
     }
     
 }

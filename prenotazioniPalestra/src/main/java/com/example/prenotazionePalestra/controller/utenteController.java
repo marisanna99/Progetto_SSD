@@ -3,9 +3,12 @@ package com.example.prenotazionePalestra.controller;
 import com.example.prenotazionePalestra.entity.*;
 import com.example.prenotazionePalestra.repository.*;
 
+/*
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
 import jakarta.validation.constraints.NotNull;
+*/
+import javax.annotation.security.RolesAllowed;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

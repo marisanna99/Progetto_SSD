@@ -4,9 +4,10 @@ server:
 keycloak:
     realm: prenRealm
     auth-server-url: http://localhost:9000/auth
-    ssl-required: external
+    #ssl-required: external
     resource: prenPalestra
+    public-client: true
+    bearer-only: true
     #credentials.secret: b87d573f-fdf5-41a3-9525-94cb01baff09
-    credentials.secret: ab5fa819-7aad-4b5a-ae6f-bd708132a53b
-    use-resource-role-mappings: true
-    keycloak.bearer-only: true
+    #credentials.secret: ab5fa819-7aad-4b5a-ae6f-bd708132a53b
+    #use-resource-role-mappings: true

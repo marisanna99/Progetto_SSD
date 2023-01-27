@@ -3,7 +3,8 @@ package com.example.prenotazionePalestra.controller;
 import com.example.prenotazionePalestra.entity.*;
 import com.example.prenotazionePalestra.repository.*;
 
-import jakarta.annotation.security.RolesAllowed;
+//import jakarta.annotation.security.RolesAllowed;
+import javax.annotation.security.RolesAllowed;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

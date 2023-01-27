@@ -94,22 +94,40 @@ public class utenteController {
 	}
 	*/
 
+	/*
 	@GetMapping("/Dashboard")
-    public ModelAndView Dashboard() {
+    public ModelAndView Dashboard(Authentication authentication) {
         //logging(request);
 
 		ModelAndView mav = new ModelAndView("dashboard");
         int r = 0;
-        /*String role = authentication.getAuthorities().stream().findFirst().get().toString();
+        String role = authentication.getAuthorities().stream().findFirst().get().toString();
         if (role.equals("ROLE_admin_role")) {
             r = 0;
         } else if (role.equals("ROLE_trainer_role")) {
             r = 1;
         } else if (role.equals("ROLE_atleta_role")){
 			r = 2;
-		}*/
+		}
+		//System.out.println(role);
         mav.addObject("r", r);
         return mav;
+
+    }*/
+	@GetMapping("/Dashboard")
+	public String Dashboard(HttpServletRequest request, Authentication authentication, Model model) {
+       // logging(request);
+        int r = 0;
+        String role = authentication.getAuthorities().stream().findFirst().get().toString();
+        if (role.equals("ROLE_admin_role")) {
+            r = 0;
+        } else if (role.equals("ROLE_trainer_role")) {
+            r = 1;
+        } else if (role.equals("ROLE_atleta_role")){
+			r = 2;
+		}
+        model.addAttribute("r", r);
+        return "dashboard";
 
     }
 

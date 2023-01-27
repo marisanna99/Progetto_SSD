@@ -8,6 +8,13 @@ keycloak:
     resource: prenPalestra
     public-client: true
     bearer-only: true
+    principal-attribute: preferred_username
+
     #credentials.secret: b87d573f-fdf5-41a3-9525-94cb01baff09
     #credentials.secret: ab5fa819-7aad-4b5a-ae6f-bd708132a53b
     #use-resource-role-mappings: true
+
+#spring.security.oauth2.client.registration.keycloak.authorization-grant-type: authorization_code
+#spring.security.oauth2.client.registration.keycloak.scope: openid
+#spring.security.oauth2.resourceserver.jwt.issuer: http://localhost:9000/auth/realms/prenRealm
+          

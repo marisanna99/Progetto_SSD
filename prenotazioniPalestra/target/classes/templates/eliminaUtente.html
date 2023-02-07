@@ -1,0 +1,56 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Elimina utente</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+		integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+	<style>
+		a {
+			text-decoration: none;
+			outline: none;
+			display: inline-block;
+			padding: 12px 40px;
+			margin: 0 auto;
+			font-family: 'Montserrat', sans-serif;
+			font-size: 24px;
+			font-weight: 300;
+			color: #740078;
+		}
+
+		#pulsante {
+			position: left;
+			outline: none;
+			cursor: pointer;
+			text-align: center;
+			text-decoration: none;
+			font: bold 12px Arial, Helvetica, sans-serif;
+			color: #fff;
+			padding: 10px 20px;
+			border: solid 1px #740078;
+			background: #740078;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+
+		<h3>Elimina atleta</h3>
+		<hr />
+
+		<form th:action="@{/app/admin/deleteUtente}" th:object="${utente}" method="POST">
+
+			<input type="text" th:field="*{matricola}" class="form-control col-4 mb-4" placeholder="Inserisci matricola" />
+			
+			<button type="submit" class="btn btn-primary col-2" id="pulsante">Conferma</button>
+
+		</form>
+		<hr />
+		<a th:href="@{/app/DashboardAdmin}">Torna alla tua Dashboard</a>
+	</div>
+
+</body>
+
+</html>

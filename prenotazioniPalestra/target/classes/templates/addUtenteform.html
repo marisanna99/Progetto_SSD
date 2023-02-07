@@ -1,0 +1,74 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Aggiungi Utente</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+		integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+	<style>
+		a {
+			text-decoration: none;
+			outline: none;
+			display: inline-block;
+			padding: 12px 40px;
+			margin: 0 auto;
+			font-family: 'Montserrat', sans-serif;
+			font-size: 24px;
+			font-weight: 300;
+			color: #740078;
+		}
+
+		#pulsante {
+			position: left;
+			outline: none;
+			cursor: pointer;
+			text-align: center;
+			text-decoration: none;
+			font: bold 12px Arial, Helvetica, sans-serif;
+			color: #fff;
+			padding: 10px 20px;
+			border: solid 1px #740078;
+			background: #740078;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+
+		<h3>Aggiungi nuovo utente</h3>
+		<hr />
+
+		<form th:action="@{/app/admin/saveUtente}" th:object="${utente}" method="POST">
+
+			<input type="text" th:field="*{nome}" class="form-control col-4 mb-4" placeholder="Inserisci nome" />
+
+			<input type="text" th:field="*{cognome}" class="form-control col-4 mb-4" placeholder="Inserisci cognome" />
+
+			<input type="text" th:field="*{username}" class="form-control col-4 mb-4"
+				placeholder="Inserisci username" />
+
+			<input type="password" th:field="*{password}" class="form-control col-4 mb-4"
+				placeholder="Inserisci password" />
+
+			<input type="text" th:field="*{email}" class="form-control col-4 mb-4" placeholder="Inserisci email" />
+
+			<input type="text" th:field="*{certificato}" class="form-control col-4 mb-4"
+				placeholder="0: no certificato, 1: con certificato" />
+
+			<input type="text" th:field="*{tipo}" class="form-control col-4 mb-4" placeholder="1: trainer, 2: atleta" />
+
+
+
+			<button type="submit" class="btn btn-primary col-2" id="pulsante">Salva</button>
+			<input type="hidden" th:field="*{matricola}" />
+
+		</form>
+		<hr />
+		<a th:href="@{/app/DashboardAdmin}">Torna alla tua Dashboard</a>
+	</div>
+
+</body>
+
+</html>

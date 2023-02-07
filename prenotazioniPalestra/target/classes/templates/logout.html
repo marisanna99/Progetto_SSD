@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout</title>
+    <script type="application/javascript">
+        function removeCookies() {
+            var res = document.cookie;
+            var multiple = res.split(";");
+            for(var i = 0; i < multiple.length; i++) {
+                var key = multiple[i].split("=");
+                document.cookie = key[0]+" =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
+            }
+        }
+
+        function logout() {
+            removeCookies();
+            if("${r == 2}"){
+                window.location.replace("http://localhost:9000/auth/realms/keycloak-prenotazione/protocol/openid-connect/logout?redirect_uri=http://localhost:8080/app/Home");
+            }else if("${r == 1}"){
+                window.location.replace("http://localhost:9000/auth/realms/keycloak-prenotazione/protocol/openid-connect/logout?redirect_uri=http://localhost:8080/app/Home");
+            }else if("${r == 0}"){
+                window.location.replace("http://localhost:9000/auth/realms/keycloak-prenotazione/protocol/openid-connect/logout?redirect_uri=http://localhost:8080/app/Home");
+            }
+            
+        }
+    </script>
+</head>
+<body>
+<a><script type="application/javascript">logout()</script></a>
+</body>
+</html>

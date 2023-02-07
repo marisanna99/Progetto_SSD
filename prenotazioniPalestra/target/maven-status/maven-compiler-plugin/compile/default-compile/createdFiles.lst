@@ -1,0 +1,11 @@
+com\example\prenotazionePalestra\entity\Utente.class
+com\example\prenotazionePalestra\service\utenteService.class
+com\example\prenotazionePalestra\repository\UtenteRepository.class
+com\example\prenotazionePalestra\repository\PrenRepository.class
+com\example\prenotazionePalestra\KeyDatabase.class
+com\example\prenotazionePalestra\Controller.class
+com\example\prenotazionePalestra\config\SecurityConfig.class
+com\example\prenotazionePalestra\prenotazionePalestraApp$1.class
+com\example\prenotazionePalestra\entity\Prenotazione.class
+com\example\prenotazionePalestra\prenotazionePalestraApp.class
+com\example\prenotazionePalestra\service\utenteServiceImpl.class

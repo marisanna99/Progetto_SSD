@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Dashboard</title>
+<style>
+
+div#esterno{
+  background-color: #ead6ea;
+  border: solid 2px #740078;
+  width: 400px;
+  height: 500px;
+  margin: 0 auto;
+}
+
+div#orizzontale {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+p{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 50px;
+}
+
+a {
+  text-decoration: none;
+  outline: none;
+  display: inline-block;
+  padding: 12px 40px;
+  margin: 0 auto;
+  border-radius: 30px;
+  background-image: linear-gradient(45deg, #aa87d8 0%, #ae65ce 50%, #740078 100%);
+  background-position: 100% 0;
+  background-size: 200% 200%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: white;
+  box-shadow: 0 16px 32px 0 rgba(37, 0, 51, 0.35);
+  transition: .5s;
+}
+a:hover {
+  box-shadow: 0 0 0 0 rgba(0,40,120,0);
+  background-position: 0 0;
+  color: rgb(51, 0, 74);
+}
+
+#pulsante {
+  position : absolute;
+  left : 700px;
+  right : 700px;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font: bold 12px Arial, Helvetica, sans-serif;
+  color: #fff;
+  padding: 10px 20px;
+  border: solid 1px #740078;
+  background: #740078;
+}
+
+</style>
+</head>
+<body>
+	<div id="esterno">
+    <div class = "container text-center" id="orizzontale">
+		<div>
+      <p align="center">Benvenuto <b th:text="${username}"></b></p>
+			<h3> <a th:href="@{/app/trainer/allPren}">Tutte le prenotazioni</a></h3>
+      <h3> <a th:href="@{/app/trainer/todayPren}">Prenotazioni per oggi</a></h3>
+			<form th:action="@{/app/logout}" method="get">
+				<button type="submit" class="btn" id="pulsante">LOGOUT</button>
+			</form>
+
+		</div>
+		
+	</div>
+</div>
+</body>
+</html>

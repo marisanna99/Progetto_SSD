@@ -1,0 +1,70 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Aggiungi Prenotazione</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+		integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+	<style>
+		a {
+			text-decoration: none;
+			outline: none;
+			display: inline-block;
+			padding: 12px 40px;
+			margin: 0 auto;
+			font-family: 'Montserrat', sans-serif;
+			font-size: 24px;
+			font-weight: 300;
+			color: #740078;
+		}
+
+		#pulsante {
+			position: left;
+			outline: none;
+			cursor: pointer;
+			text-align: center;
+			text-decoration: none;
+			font: bold 12px Arial, Helvetica, sans-serif;
+			color: #fff;
+			padding: 10px 20px;
+			border: solid 1px #740078;
+			background: #740078;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+
+		<h3>Aggiungi nuova Prenotazione</h3>
+		<hr />
+
+		<form th:action="@{/app/atleta/savePrenotazione}" th:object="${prenotazione}" method="POST">
+
+			<input type="text" th:field="*{matricola}" class="form-control col-4 mb-4" placeholder="Inserisci matricola" />
+			<select th:field="*{sala}" class="form-control col-4 mb-4" placeholder="Inserisci sala">
+				<option th:value="Sala" th:text="Sala"></option>
+				<option th:value="Attrezzi" th:text="Attrezzi"></option>
+				<option th:value="Zumba" th:text="Zumba"></option>
+			
+			</select>
+
+			<input type="text" th:field="*{oraArrivo}" class="form-control col-4 mb-4"
+				placeholder="Inserisci ora di arrivo" />
+
+			<input type="text" th:field="*{minArrivo}" class="form-control col-4 mb-4"
+				placeholder="Inserisci minuti di arrivo" />
+
+
+			<button type="submit" class="btn btn-primary col-2" id="pulsante">Salva</button>
+			<input type="hidden" th:field="*{idPren}" />
+
+		</form>
+		<hr />
+		<a th:href="@{/app/DashboardAtleta}">Torna alla tua Dashboard</a>
+	</div>
+
+</body>
+
+</html>

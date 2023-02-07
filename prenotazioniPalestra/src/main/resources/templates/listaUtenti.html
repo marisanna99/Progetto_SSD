@@ -1,0 +1,68 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Lista utenti</title>
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+		integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+	<style>
+		a {
+			text-decoration: none;
+			outline: none;
+			display: inline-block;
+			padding: 12px 40px;
+			margin: 0 auto;
+			border-radius: 30px;
+			background-image: linear-gradient(45deg, #aa87d8 0%, #ae65ce 50%, #740078 100%);
+			background-position: 100% 0;
+			background-size: 200% 200%;
+			font-family: 'Montserrat', sans-serif;
+			font-size: 24px;
+			font-weight: 300;
+			color: white;
+			box-shadow: 0 16px 32px 0 rgba(37, 0, 51, 0.35);
+			transition: .5s;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+
+		<h3>Lista utenti</h3>
+
+		<hr />
+		<a th:href="@{/app/DashboardAdmin}" class="btn btn-primary">Torna alla tua Dashboard</a>
+		<br /><br />
+		<table class="table table-bordered table-striped" id="utentiTable">
+
+			<thead>
+				<tr>
+					<th>Matricola</th>
+					<th>Nome</th>
+					<th>Cognome</th>
+					<th>Email</th>
+					<th>Certificato</th>
+					<th>Tipo</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="u: ${utenti}">
+					<td th:text="${u.matricola}" />
+					<td th:text="${u.nome}" />
+					<td th:text="${u.cognome}" />
+					<td th:text="${u.email}" />
+					<td th:text="${u.certificato}" />
+					<td th:text="${u.tipo}" />
+
+				</tr>
+			</tbody>
+
+		</table>
+	</div>
+
+</body>
+
+</html>
